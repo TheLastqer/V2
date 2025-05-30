@@ -1,0 +1,192 @@
+-- Coolest Custom GUI Script for Roblox
+
+-- Create ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "CoolestGUI"
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Create Main Frame
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 350, 0, 180)
+frame.Position = UDim2.new(0.5, -160, 0.5, -90)
+frame.BackgroundColor3 = Color3.fromRGB(20, 22, 34)
+frame.BorderSizePixel = 0
+frame.Active = true
+frame.ZIndex = 2
+frame.Parent = screenGui
+
+-- Neon Glow Effect (outer frame)
+local neon = Instance.new("ImageLabel")
+neon.BackgroundTransparency = 1
+neon.Image = "rbxassetid://5107184882"
+neon.ImageColor3 = Color3.fromRGB(0, 255, 200)
+neon.ImageTransparency = 0.7
+neon.Size = UDim2.new(1, 40, 1, 40)
+neon.Position = UDim2.new(0, -20, 0, -20)
+neon.ZIndex = 1
+neon.Parent = frame
+
+-- Rounded corners
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 22)
+corner.Parent = frame
+
+-- Drop shadow
+local shadow = Instance.new("ImageLabel")
+shadow.BackgroundTransparency = 1
+shadow.Image = "rbxassetid://1316045217"
+shadow.ImageTransparency = 0.8
+shadow.Size = UDim2.new(1, 40, 1, 40)
+shadow.Position = UDim2.new(0, -20, 0, -20)
+shadow.ZIndex = 0
+shadow.Parent = frame
+
+-- Title Label
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 44)
+title.BackgroundTransparency = 1
+title.Text = "⚡ FxZ HUB ⚡"
+title.Font = Enum.Font.FredokaOne
+title.TextSize = 32
+title.TextColor3 = Color3.fromRGB(0, 255, 200)
+title.TextStrokeTransparency = 0.6
+title.ZIndex = 3
+title.Parent = frame
+
+-- Info Label
+local info = Instance.new("TextLabel")
+info.Size = UDim2.new(1, -40, 0, 28)
+info.Position = UDim2.new(0, 20, 0, 48)
+info.BackgroundTransparency = 1
+info.Text = "JOIN OUR DISCORD SERVER!"
+info.Font = Enum.Font.Gotham
+info.TextSize = 18
+info.TextColor3 = Color3.fromRGB(200, 255, 255)
+info.TextStrokeTransparency = 0.8
+info.ZIndex = 3
+info.Parent = frame
+
+-- Create Close Button
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.new(0, 38, 0, 38)
+closeButton.Position = UDim2.new(1, -44, 0, 6)
+closeButton.BackgroundColor3 = Color3.fromRGB(255, 80, 80)
+closeButton.Text = "✕"
+closeButton.Font = Enum.Font.GothamBold
+closeButton.TextSize = 22
+closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeButton.AutoButtonColor = false
+closeButton.ZIndex = 4
+closeButton.Parent = frame
+
+local closeCorner = Instance.new("UICorner")
+closeCorner.CornerRadius = UDim.new(1, 0)
+closeCorner.Parent = closeButton
+
+-- Create "fxz" Button
+local createButton = Instance.new("TextButton")
+createButton.Size = UDim2.new(0.4, -8, 0, 48)
+createButton.Position = UDim2.new(0.05, 0, 0.65, 0)
+createButton.BackgroundColor3 = Color3.fromRGB(70, 180, 220)
+createButton.Text = "FxZ Hub"
+createButton.Font = Enum.Font.GothamBold
+createButton.TextSize = 22
+createButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+createButton.AutoButtonColor = false
+createButton.ZIndex = 3
+createButton.Parent = frame
+
+local createCorner = Instance.new("UICorner")
+createCorner.CornerRadius = UDim.new(0, 14)
+createCorner.Parent = createButton
+
+-- Create "Discord Link" Button
+local surpriseButton = Instance.new("TextButton")
+surpriseButton.Size = UDim2.new(0.4, -8, 0, 48)
+surpriseButton.Position = UDim2.new(0.55, 8, 0.65, 0)
+surpriseButton.BackgroundColor3 = Color3.fromRGB(90, 220, 120)
+surpriseButton.Text = "Discord Link"
+surpriseButton.Font = Enum.Font.GothamBold
+surpriseButton.TextSize = 22
+surpriseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+surpriseButton.AutoButtonColor = false
+surpriseButton.ZIndex = 3
+surpriseButton.Parent = frame
+
+local surpriseCorner = Instance.new("UICorner")
+surpriseCorner.CornerRadius = UDim.new(0, 14)
+surpriseCorner.Parent = surpriseButton
+
+-- Button hover animation
+local TweenService = game:GetService("TweenService")
+
+local function hoverEffect(button, colorHover, colorNormal)
+    button.MouseEnter:Connect(function()
+        TweenService:Create(button, TweenInfo.new(0.15), {BackgroundColor3 = colorHover}):Play()
+    end)
+    button.MouseLeave:Connect(function()
+        TweenService:Create(button, TweenInfo.new(0.15), {BackgroundColor3 = colorNormal}):Play()
+    end)
+end
+
+hoverEffect(closeButton, Color3.fromRGB(255, 120, 120), Color3.fromRGB(255, 80, 80))
+hoverEffect(createButton, Color3.fromRGB(120, 220, 255), Color3.fromRGB(70, 180, 220))
+hoverEffect(surpriseButton, Color3.fromRGB(120, 255, 180), Color3.fromRGB(90, 220, 120))
+
+-- Button functionality: Close the GUI
+closeButton.MouseButton1Click:Connect(function()
+    screenGui:Destroy()
+end)
+
+-- Button functionality: FxZ action (runs your script)
+createButton.MouseButton1Click:Connect(function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/TheLastqer/v1/refs/heads/main/FxZ%20Hub'))()
+    createButton.Text = "Loaded!"
+    TweenService:Create(createButton, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(40, 130, 180)}):Play()
+    wait(1)
+    createButton.Text = "FxZ"
+    TweenService:Create(createButton, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(70, 180, 220)}):Play()
+end)
+
+-- Button functionality: Surprise action
+surpriseButton.MouseButton1Click:Connect(function()
+    surpriseButton.Text = "https://discord.gg/f9CEfBPJ"
+    TweenService:Create(surpriseButton, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(60, 180, 90)}):Play()
+    wait(1)
+    -- Try copying to clipboard (only possible in Roblox Studio with `setclipboard`)
+    pcall(function()
+        setclipboard("https://discord.gg/f9CEfBPJ")
+    end)
+    surpriseButton.Text = "Discord Link"
+    TweenService:Create(surpriseButton, TweenInfo.new(0.15), {BackgroundColor3 = Color3.fromRGB(90, 220, 120)}):Play()
+end)
+
+-- Custom Drag Script
+local dragging, dragInput, dragStart, startPos
+
+frame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = frame.Position
+
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+frame.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement then
+        dragInput = input
+    end
+end)
+
+game:GetService("UserInputService").InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        local delta = input.Position - dragStart
+        frame.Position = startPos + UDim2.new(0, delta.X, 0, delta.Y)
+    end
+end)
