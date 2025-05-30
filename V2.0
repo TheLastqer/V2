@@ -103,7 +103,6 @@ CheckKey.MouseButton1Click:Connect(function()
 
 -- Put Your Script Here
 loadstring(game:HttpGet('https://raw.githubusercontent.com/TheLastqer/v1/refs/heads/main/FxZ%20Hub'))()
-
     else
         TextBox.PlaceholderText = "Invalid key. Try again."
         TextBox.Text = ""
